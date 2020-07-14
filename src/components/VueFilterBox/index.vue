@@ -76,7 +76,20 @@
 
 <script>
   import 'view-design/dist/styles/iview.css' // 引入view-design css样式
-  import {Input, Select, Option, Form, FormItem, Button} from 'view-design' // 引入view-design组件
+  import {
+    Input,
+    InputNumber,
+    Select,
+    Option,
+    DatePicker,
+    Switch,
+    Slider,
+    TimePicker,
+    Cascader,
+    Form,
+    FormItem,
+    Button
+  } from 'view-design' // 引入view-design组件
   export default {
     props: {
       value: {
@@ -102,8 +115,14 @@
     },
     components: {
       Input,
+      InputNumber,
       Select,
       Option,
+      DatePicker,
+      ISwitch: Switch,
+      Slider,
+      TimePicker,
+      Cascader,
       Form,
       FormItem,
       Button

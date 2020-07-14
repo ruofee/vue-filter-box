@@ -12,7 +12,8 @@
       <Component
         v-model="_value[key]"
         :is="modelData.component"
-        v-bind="modelData.extends || {}">
+        v-bind="modelData.prop || {}"
+        v-on="modelData.on || {}">
         <template v-if="haveOptionsComponents.includes(modelData.component)">
           <Option
             v-for="option of (modelData.options || [])"
@@ -26,12 +27,16 @@
     <FormItem v-if="!buttonHide">
       <Button type="primary" @click="onSearch">筛选</Button>
     </FormItem>
+    <Spin fix v-if="loading">
+      <Icon type="ios-loading" :size="23" class="loading"></Icon>
+    </Spin>
     <slot name="footer"></slot>
   </Form>
 </template>
 
 <style lang="less" scoped>
   .filter {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
 
@@ -59,9 +64,19 @@
       }
     }
   }
+  .loading{
+    animation: loading-spin 1s linear infinite;
+  }
+  @keyframes loading-spin {
+    from { transform: rotate(0deg);}
+    50%  { transform: rotate(180deg);}
+    to   { transform: rotate(360deg);}
+  }
 </style>
 
 <script>
+  import 'view-design/dist/styles/iview.css' // 引入view-design css样式
+  import {Input, Select, Option, Form, FormItem, Button} from 'view-design' // 引入view-design组件
   export default {
     props: {
       value: {
@@ -76,10 +91,22 @@
           return {}
         }
       },
+      loading: {
+        type: Boolean,
+        default: false
+      },
       buttonHide: {
         type: Boolean,
         default: false
       }
+    },
+    components: {
+      Input,
+      Select,
+      Option,
+      Form,
+      FormItem,
+      Button
     },
     data() {
       return {
@@ -103,7 +130,7 @@
       onSearch() {
         this.$refs.filter.validate(valid => {
           if (valid) {
-            this.$emit('on-search', this._value);
+            this.$emit('on-search', this._value)
           }
         })
       }

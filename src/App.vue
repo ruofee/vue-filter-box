@@ -64,7 +64,7 @@
               width: '300px'
             },
             iSwitch: {
-              component: 'ISwitch',
+              component: 'i-switch',
               title: '开关',
               width: '300px'
             },

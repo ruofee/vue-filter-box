@@ -4,7 +4,12 @@
 
 ## 介绍
 
-vue-filter-box是一款根据JSON对象自动构建的vue筛选框组件, 基于[view-design](<https://www.iviewui.com/>)
+vue-filter-box是一款根据JSON对象自动构建的vue筛选框组件, 基于[view-design](<https://www.iviewui.com/>), 支持多种常见筛选组件: 输入框, 下拉框, 时间选择器, 级联选择器等多种组件, 以及根据特定规则编写的自定义组件
+
+## 项目引入要求
+
+1. 安装`vue`
+2. 项目[全局引入](https://www.iviewui.com/docs/guide/start#YR_ViewUI)`view-design`, 或是[按需引入](https://www.iviewui.com/docs/guide/start#AXYY)所需组件
 
 ## 安装
 
@@ -17,7 +22,7 @@ yarn add vue-filter-box
 
 ## 使用
 
-**全局注册:**
+### 全局注册:
 
 ```javascript
 import Vue from 'vue'
@@ -25,7 +30,7 @@ import VueFilterBox from 'vue-filter-box'
 Vue.use(VueFilterBox)
 ```
 
-**单独引入组件:**
+### 单独引入组件:
 
 ```vue
 <template>
@@ -43,310 +48,321 @@ Vue.use(VueFilterBox)
 
 ## 示例
 
-**代码:**
+### 代码:
 
 ```vue
 <template>
-    <vue-filter-box :items="filterItems" :value="filterValue" @on-click="search"></vue-filter-box>
+    <div class="form-wrap">
+      <vue-filter-box ref="filterBox" :model="model" :value="filterValue" button-hide @on-search="onSearch">
+        <div class="footer" slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
+      </vue-filter-box>
+    </div>
 </template>
+
+<style lang="less" scoped>
+  .form-wrap {
+    padding: 20px;
+
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+    }
+  }
+</style>
+
 <script>
-    import {VueFilterBox} from 'vue-filter-box'
-    export default {
-        name: 'Demo',
-        components: {
-            VueFilterBox
-        },
-        data() {
-            return {
-                filterValue: {
-                    inputKey: '示例',
-                    selectKey: 1,
-                    cascaderKey: [1, 3],
-                    datepickerKey: ['2016-01-01', '2016-02-15']
-                },
-                filterItems: [
-                    {
-                        title: '输入框',
-                        key: 'inputKey',
-                        type: 'input',
-                        minWidth: '15%'
-                    },
-                    {
-                        title: '下拉框',
-                        key: 'selectKey',
-                        type: 'select',
-                        minWidth: '15%',
-                        options: [
-                            {
-                                label: '选项1',
-                                value: 1
-                            },
-                            {
-                                label: '选项2',
-                                value: 2
-                            }
-                        ]
-                    },
-                    {
-                        title: '级联下拉框',
-                        key: 'cascaderKey',
-                        type: 'cascader',
-                        minWidth: '15%',
-                        options: [
-                            {
-                                label: '选项1',
-                                value: 1,
-                                children: [
-                                    {
-                                        label: '选项3',
-                                        value: 3
-                                    }
-                                ]
-                            },
-                            {
-                                label: '选项2',
-                                value: 2
-                            }
-                        ]
-                    },
-                    {
-                        title: '时间选择器',
-                        key: 'datepickerKey',
-                        type: 'datepicker',
-                        minWidth: '30%',
-                        extend: {
-                            props: {
-                              type: 'daterange'
-                            }
-                        }
-                    }
+  import {VueFilterBox} from 'vue-filter-box'
+  import {Button} from 'view-design'
+  export default {
+    name: 'App',
+    components: {
+      VueFilterBox,
+      Button
+    },
+    data() {
+      return {
+          model: {
+            input: {
+              component: 'Input',
+              title: '输入框',
+              width: '20%',
+              on: {
+                'on-change': event => {
+                  console.log(`输入的值为: ${event.target.value}`)
+                }
+              }
+            },
+            inputNumber: {
+              component: 'InputNumber',
+              title: '数字输入框',
+              width: '20%'
+            },
+            select: {
+              component: 'Select',
+              title: '搜索框',
+              width: '20%',
+              options: [
+                {label: 'option1', value: 0},
+                {label: 'option2', value: 1}
+              ],
+              prop: {
+                multiple: true
+              }
+            },
+            date: {
+              component: 'DatePicker',
+              title: '日期选择器',
+              width: '20%'
+            },
+            time: {
+              component: 'TimePicker',
+              title: '时间选择器',
+              width: '20%'
+            },
+            iSwitch: {
+              component: 'i-switch',
+              title: '开关',
+              width: '20%'
+            },
+            slider: {
+              component: 'Slider',
+              title: '滑块',
+              width: '20%'
+            },
+            cascader: {
+              component: 'Cascader',
+              title: '级联选择器',
+              width: '20%',
+              prop: {
+                data: [
+                  {
+                    value: 'beijing',
+                    label: '北京',
+                    children: [
+                      {value: 'gugong', label: '故宫'}
+                    ]
+                  }
                 ]
+              }
             }
-        },
-        methods: {
-            search(value) {}
+          },
+          filterValue: {
+            input: '这是一个输入框',
+            inputNumber: 50,
+            select: [1],
+            date: new Date(),
+            time: '01:00:00',
+            iSwitch: true,
+            cascader: ['beijing', 'gugong'],
+            slider: 50
+          }
+      }
+    },
+    methods: {
+      searchWrap() {
+        this.$refs.filterBox.onSearch()
+      },
+      onSearch(value) {
+        console.log(value)
+      }
+    }
+  }
+</script>
+```
+
+### 展示为:
+
+![](./public/demo1.png)
+
+## API文档
+
+### Props
+
+| 属性        | 说明                                        | 类型    | 默认值  |
+| ----------- | ------------------------------------------- | ------- | ------- |
+| model       | 筛选项构建模型, 详细结构查看[Model](#Model) | Object  | {}      |
+| value       | 绑定的值, 可使用v-model双向绑定             | Object  | {}      |
+| size        | 组件大小, 可选值为small, default, large     | String  | default |
+| loading     | 加载状态                                    | Boolean | false   |
+| button-hide | 是否隐藏默认按钮                            | Boolean | false   |
+
+### Events
+
+| 事件名    | 说明               | 返回值 |
+| --------- | ------------------ | ------ |
+| on-search | 点击搜索按钮时触发 | value  |
+
+### slots
+
+| 名称   | 说明                                           |
+| ------ | ---------------------------------------------- |
+| footer | 筛选项底部, 跟在最后一个筛选项或是搜索按钮后面 |
+
+### Model
+
+**props中的model结构**
+
+| 属性      | 说明                                                         | 类型             | 示例                        |
+| --------- | ------------------------------------------------------------ | ---------------- | --------------------------- |
+| component | 筛选项组件, 支持Input, Select等, 具体查看[Components](#Components) | String/Component | 'Input'                     |
+| title     | 筛选项标题                                                   | String           | '这是一个标题'              |
+| width     | 筛选项宽度, 支持px和百分比                                   | String           | '200px' 或者 '20%'          |
+| options   | 下拉选项, 仅当component为Select时有效, 具体格式请查看[Options](#Options) | Array            | [{label: '文本', value: 1}] |
+| props     | 筛选项组件props, 具体请查看[view-design](<https://www.iviewui.com/>)中组件对应的props | Object           | {type: 'textarea'}          |
+| on        | 筛选项组件的methods, 具体请查看[view-design](https://www.iviewui.com/)中组件支持的methods |                  | {'on-change': () => {}}     |
+
+### Options
+
+**model props中的options结构**
+
+| 属性  | 说明             | 类型          |
+| ----- | ---------------- | ------------- |
+| label | 选项显示文本内容 | String        |
+| value | 选项值           | String/Number |
+
+### Components
+
+**vue-filter-box支持的组件**
+
+| 组件名称    | 说明                    |
+| ----------- | ----------------------- |
+| Input       | 输入框                  |
+| InputNumber | 数字输入框              |
+| Select      | 下拉框, 配合options使用 |
+| DatePicker  | 日期选择器              |
+| TimePicker  | 时间选择器              |
+| i-switch    | 开关                    |
+| Slider      | 可拖动的滑块            |
+| Cascader    | 级联选择器              |
+
+### 自定义组件
+
+除了[Components中的组件, 还可进行使用自定义组件, 只要组件内部支持v-model进行数据绑定即可, 以下是自定义组件的例子:
+
+```vue
+// CustomComponent.vue
+<template>
+  <div class="wrap">
+    <div
+      :class="{
+        'selected-block': option.value === _value,
+        'block': true
+      }"
+      v-for="option of options"
+      :key="option.value"
+      @click="setStatus(option.value)">
+      {{option.label}}
+    </div>
+  </div>
+</template>
+
+<style lang="less">
+  @color: #dddee2;
+  @backgroundColor: #2d8bf0;
+  .wrap {
+    display: flex;
+    border: 1px solid @color;
+    border-radius: 4px;
+
+    .selected-block {
+      color: #fff;
+      background-color: @backgroundColor;
+    }
+
+    .block:first-child {
+      border-left: none;
+    }
+
+    .block {
+      display: flex;
+      justify-content: center;
+      flex-grow: 1;
+      border-left: 1px solid @color;
+      cursor: pointer;
+    }
+  }
+</style>
+
+<script>
+    import {Button} from 'view-design'
+    export default {
+      name: 'CustomComponent',
+      components: {
+        Button
+      },
+      props: {
+        value: Boolean
+      },
+      computed: {
+        _value: {
+          get() {
+            return this.value
+          },
+          set(value) {
+            this.$emit('input', value)
+          }
         }
+      },
+      data() {
+        return {
+          options: [
+            {label: '开', value: true},
+            {label: '关', value: false}
+          ]
+        }
+      },
+      methods: {
+        setStatus(status) {
+          this._value = status;
+        }
+      }
     }
 </script>
 ```
 
-**展示为:**
+在vue-filter-box中引入:
 
-![](./public/demo.jpg)
+```vue
+// App.vue
+<template>
+    <div class="form-wrap">
+      <vue-filter-box ref="filterBox" :model="model" :value="filterValue" @on-search="onSearch">
+      </vue-filter-box>
+    </div>
+</template>
 
-## API文档
-
-**props:**
-
-- items
-
-  `array` 构建筛选项配置, 详细请看下文中的*item*
-
-- value
-
-  `object` 筛选项值
-
-- size
-
-  `string` 筛选项组件大小
-
-  - default 默认
-  - small
-  - large
-
-- loading
-
-  `boolean` 加载状态
-
-- confirm
-
-  `object` 筛选按钮基本属性, 详细请看下文中的*confirm*
-
-**event:**
-
-- on-click
-
-  点击事件, 返回值为当前筛选项值[Object]
-
-**slot**
-
-- footer 自定义底部
-
-  注意: footer会导致confirm部分属性不生效, 因为设置footer就意味着失去默认的按钮, 相应的, on-click也会失效
-
-**item**
-
-构建筛选项配置数据对象, 是items中的一项
-
-- title
-
-  `string` 筛选项标题
-
-- type
-
-  `string` 筛选项类型
-
-  | 值         | 说明       |
-  | ---------- | ---------- |
-  | input      | 输入框     |
-  | select     | 下拉框     |
-  | datepicker | 时间选择器 |
-  | cascader   | 级联下拉框 |
-
-- key
-
-  `string` 键值
-
-- width
-
-  `string` 筛选项宽度; 例如`200px`, `20%`
-
-- minWidth
-
-  `string` 筛选项最小宽度, 当行宽小于`minWidth`时自动换行; 例如`200px`, `20%`
-
-- extend
-
-  `object` 拓展属性, 格式规则请看下文中的*extend*, 筛选组件的props以及event则查看[view-design](<https://www.iviewui.com/>)中对应组件介绍
-
-  示例:
-
-  ```javascript
-  {
-      title: '下拉框',
-      type: 'select',
-      key: 'selectKey',
-      option: [
-          {
-              label: '示例1',
-              value: 1
-          }
-      ],
-      extend: {
-          props: {
-              size: 'small' // 修改下拉框组件的size, 具体请查看view-design官方文档
+<script>
+  import {VueFilterBox} from '@/components/index.js'
+  import CustomComponent from './CustomComponent.vue'
+  export default {
+    name: 'App',
+    components: {
+      VueFilterBox
+    },
+    data() {
+      return {
+          model: {
+            custom: {
+              component: CustomComponent,
+              title: '自定义组件',
+              width: '20%'
+            }
           },
-          on: {
-              'on-change': value => {} // 设置下拉框组件修改值回调函数, 具体请查看view-design官方文档
+          filterValue: {
+            custom: false
           }
       }
-  }
-  ```
-
-- data
-
-  `array` 下拉列表, 仅当`type`等于`select`, `cascader`时生效
-
-  data中每个`option`格式
-
-  - label
-
-    `string` 下拉文本
-
-  - value
-
-    `string` 值
-
-  - children
-
-    `array` 子级列表, 格式和`data`一致, 仅当`type`等于`cascader`时生效
-
-**confirm**
-
-- title
-
-  `string` 按钮文本
-
-- type
-
-  `string` 按钮类型
-
-  - primary
-  - default
-  -  dashed
-  - text
-  - success
-  - warning
-  - error
-  - info
-
-- isNotFull
-
-  `boolean` 是否占据该行剩余空间, 表现形式为: 按钮是否置于该行的末尾
-
-- extend
-
-  `object` 拓展属性, 详细请看下文的*extend*, 相应的props以及event则查看[view-design](<https://www.iviewui.com/>)中Button组件介绍
-
-**extend**
-
-`object` 拓展属性, 具体格式规则可查看[vue官方文档 - 渲染函数 & JSX - 深入数据对象](<https://cn.vuejs.org/v2/guide/render-function.html#%E6%B7%B1%E5%85%A5%E6%95%B0%E6%8D%AE%E5%AF%B9%E8%B1%A1>)
-
-以下是官方文档中的格式:
-
-```javascript
-{
-  // 与 `v-bind:class` 的 API 相同，
-  // 接受一个字符串、对象或字符串和对象组成的数组
-  'class': {
-    foo: true,
-    bar: false
-  },
-  // 与 `v-bind:style` 的 API 相同，
-  // 接受一个字符串、对象，或对象组成的数组
-  style: {
-    color: 'red',
-    fontSize: '14px'
-  },
-  // 普通的 HTML attribute
-  attrs: {
-    id: 'foo'
-  },
-  // 组件 prop
-  props: {
-    myProp: 'bar'
-  },
-  // DOM 属性
-  domProps: {
-    innerHTML: 'baz'
-  },
-  // 事件监听器在 `on` 属性内，
-  // 但不再支持如 `v-on:keyup.enter` 这样的修饰器。
-  // 需要在处理函数中手动检查 keyCode。
-  on: {
-    click: this.clickHandler
-  },
-  // 仅用于组件，用于监听原生事件，而不是组件内部使用
-  // `vm.$emit` 触发的事件。
-  nativeOn: {
-    click: this.nativeClickHandler
-  },
-  // 自定义指令。注意，你无法对 `binding` 中的 `oldValue`
-  // 赋值，因为 Vue 已经自动为你进行了同步。
-  directives: [
-    {
-      name: 'my-custom-directive',
-      value: '2',
-      expression: '1 + 1',
-      arg: 'foo',
-      modifiers: {
-        bar: true
+    },
+    methods: {
+      onSearch(value) {
+        console.log(value)
       }
     }
-  ],
-  // 作用域插槽的格式为
-  // { name: props => VNode | Array<VNode> }
-  scopedSlots: {
-    default: props => createElement('span', props.text)
-  },
-  // 如果组件是其它组件的子组件，需为插槽指定名称
-  slot: 'name-of-slot',
-  // 其它特殊顶层属性
-  key: 'myKey',
-  ref: 'myRef',
-  // 如果你在渲染函数中给多个元素都应用了相同的 ref 名，
-  // 那么 `$refs.myRef` 会变成一个数组。
-  refInFor: true
-}
+  }
+</script>
 ```
 
+展示:
+
+![](./public/demo2.png)

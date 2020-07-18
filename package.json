@@ -1,6 +1,8 @@
 {
   "name": "vue-filter-box",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "vue-filter-box is a dynamic filter box base on view-design",
+  "homepage": "github.com/ruofee/vue-filter-box#readme",
   "license": "MIT",
   "author": {
     "email": "ruofee@126.com",

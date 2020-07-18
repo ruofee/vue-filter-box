@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
+import viewDesign from 'view-design'
 import 'view-design/dist/styles/iview.css'
-import ViewDesign from 'view-design'
-
 
 Vue.config.productionTip = false
-Vue.use(ViewDesign)
+Vue.use(viewDesign)
 
 new Vue({
   render: h => h(App),

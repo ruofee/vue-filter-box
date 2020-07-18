@@ -173,7 +173,7 @@ Vue.use(VueFilterBox)
 
 ### 展示为:
 
-![](./public/demo1.png)
+![demo1](http://img.ruofee.cn/demo1.jpg)
 
 ## API文档
 
@@ -181,7 +181,7 @@ Vue.use(VueFilterBox)
 
 | 属性        | 说明                                        | 类型    | 默认值  |
 | ----------- | ------------------------------------------- | ------- | ------- |
-| model       | 筛选项构建模型, 详细结构查看[Model](#Model) | Object  | {}      |
+| model       | 筛选项构建模型, 详细结构查看[Model](#model) | Object  | {}      |
 | value       | 绑定的值, 可使用v-model双向绑定             | Object  | {}      |
 | size        | 组件大小, 可选值为small, default, large     | String  | default |
 | loading     | 加载状态                                    | Boolean | false   |
@@ -205,10 +205,10 @@ Vue.use(VueFilterBox)
 
 | 属性      | 说明                                                         | 类型             | 示例                        |
 | --------- | ------------------------------------------------------------ | ---------------- | --------------------------- |
-| component | 筛选项组件, 支持Input, Select等, 具体查看[Components](#Components) | String/Component | 'Input'                     |
+| component | 筛选项组件, 支持Input, Select等, 具体查看[Components](#components) | String/Component | 'Input'                     |
 | title     | 筛选项标题                                                   | String           | '这是一个标题'              |
 | width     | 筛选项宽度, 支持px和百分比                                   | String           | '200px' 或者 '20%'          |
-| options   | 下拉选项, 仅当component为Select时有效, 具体格式请查看[Options](#Options) | Array            | [{label: '文本', value: 1}] |
+| options   | 下拉选项, 仅当component为Select时有效, 具体格式请查看[Options](#options) | Array            | [{label: '文本', value: 1}] |
 | props     | 筛选项组件props, 具体请查看[view-design](<https://www.iviewui.com/>)中组件对应的props | Object           | {type: 'textarea'}          |
 | on        | 筛选项组件的methods, 具体请查看[view-design](https://www.iviewui.com/)中组件支持的methods |                  | {'on-change': () => {}}     |
 
@@ -365,4 +365,4 @@ Vue.use(VueFilterBox)
 
 展示:
 
-![](./public/demo2.png)
+![demo2](http://img.ruofee.cn/demo2.jpg)

@@ -34,7 +34,7 @@ Vue.use(VueFilterBox)
 
 ```vue
 <template>
-	<vue-filter-box></vue-filter-box>
+  <vue-filter-box></vue-filter-box>
 </template>
 <script>
     import {VueFilterBox} from 'vue-filter-box'
@@ -52,28 +52,24 @@ Vue.use(VueFilterBox)
 
 ```vue
 <template>
-    <div class="form-wrap">
-      <vue-filter-box ref="filterBox" :model="model" :value="filterValue" button-hide @on-search="onSearch">
-        <div class="footer" slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
-      </vue-filter-box>
-    </div>
+  <div class="form-wrap">
+    <vue-filter-box ref="filterBox" :model="items" :value="filterValue" button-hide @on-search="onSearch">
+      <div slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
+    </vue-filter-box>
+    <p>{{filterValue}}</p>
+  </div>
 </template>
 
 <style lang="less" scoped>
   .form-wrap {
     padding: 20px;
-
-    .footer {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-    }
   }
 </style>
 
 <script>
-  import {VueFilterBox} from 'vue-filter-box'
+  import {VueFilterBox} from '@/components/index.js'
   import {Button} from 'view-design'
+  import CustomComponent from './CustomComponent.vue'
   export default {
     name: 'App',
     components: {
@@ -82,11 +78,11 @@ Vue.use(VueFilterBox)
     },
     data() {
       return {
-          model: {
+          items: {
             input: {
               component: 'Input',
               title: '输入框',
-              width: '20%',
+              width: '300px',
               on: {
                 'on-change': event => {
                   console.log(`输入的值为: ${event.target.value}`)
@@ -96,12 +92,12 @@ Vue.use(VueFilterBox)
             inputNumber: {
               component: 'InputNumber',
               title: '数字输入框',
-              width: '20%'
+              width: '300px'
             },
             select: {
               component: 'Select',
               title: '搜索框',
-              width: '20%',
+              width: '300px',
               options: [
                 {label: 'option1', value: 0},
                 {label: 'option2', value: 1}
@@ -113,27 +109,27 @@ Vue.use(VueFilterBox)
             date: {
               component: 'DatePicker',
               title: '日期选择器',
-              width: '20%'
+              width: '300px'
             },
             time: {
               component: 'TimePicker',
               title: '时间选择器',
-              width: '20%'
+              width: '300px'
             },
             iSwitch: {
               component: 'i-switch',
               title: '开关',
-              width: '20%'
+              width: '300px'
             },
             slider: {
               component: 'Slider',
               title: '滑块',
-              width: '20%'
+              width: '300px'
             },
             cascader: {
               component: 'Cascader',
               title: '级联选择器',
-              width: '20%',
+              width: '300px',
               prop: {
                 data: [
                   {
@@ -145,6 +141,11 @@ Vue.use(VueFilterBox)
                   }
                 ]
               }
+            },
+            custom: {
+              component: CustomComponent,
+              title: '自定义组件',
+              width: '300px'
             }
           },
           filterValue: {
@@ -155,7 +156,8 @@ Vue.use(VueFilterBox)
             time: '01:00:00',
             iSwitch: true,
             cascader: ['beijing', 'gugong'],
-            slider: 50
+            slider: 50,
+            custom: false
           }
       }
     },
@@ -315,7 +317,7 @@ Vue.use(VueFilterBox)
       },
       methods: {
         setStatus(status) {
-          this._value = status;
+          this._value = status
         }
       }
     }

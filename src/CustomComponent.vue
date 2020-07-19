@@ -70,7 +70,7 @@
       },
       methods: {
         setStatus(status) {
-          this._value = status;
+          this._value = status
         }
       }
     }

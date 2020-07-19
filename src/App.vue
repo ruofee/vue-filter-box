@@ -1,10 +1,10 @@
 <template>
-    <div class="form-wrap">
-      <vue-filter-box ref="filterBox" :model="items" :value="filterValue" button-hide @on-search="onSearch">
-        <div slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
-      </vue-filter-box>
-      <p>{{filterValue}}</p>
-    </div>
+  <div class="form-wrap">
+    <vue-filter-box ref="filterBox" :model="items" :value="filterValue" button-hide @on-search="onSearch">
+      <div slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
+    </vue-filter-box>
+    <p>{{filterValue}}</p>
+  </div>
 </template>
 
 <style lang="less" scoped>

@@ -62,6 +62,10 @@
         /deep/ .ivu-date-picker {
           width: 100%;
         }
+
+        /deep/ .ivu-input-number {
+          width: 100%;
+        }
       }
     }
   }

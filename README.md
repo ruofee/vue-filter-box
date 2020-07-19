@@ -2,6 +2,8 @@
 
 ![](https://img.shields.io/npm/v/vue-filter-box.svg) ![](https://img.shields.io/npm/dt/vue-filter-box.svg) ![](https://img.shields.io/badge/language-javascript-yellow.svg)![](https://img.shields.io/badge/component-vue-green.svg)
 
+> 项目依赖于**vue**和**view-design**, 请提前安装
+
 ## 介绍
 
 vue-filter-box是一款根据JSON对象自动构建的vue筛选框组件, 基于[view-design](<https://www.iviewui.com/>), 支持多种常见筛选组件: 输入框, 下拉框, 时间选择器, 级联选择器等多种组件, 以及根据特定规则编写的自定义组件
@@ -36,6 +38,9 @@ Vue.use(VueFilterBox)
 <template>
   <vue-filter-box></vue-filter-box>
 </template>
+```
+
+```html
 <script>
     import {VueFilterBox} from 'vue-filter-box'
     export default {
@@ -48,9 +53,9 @@ Vue.use(VueFilterBox)
 
 ## 示例
 
-### 代码:
+![demo1](http://img.ruofee.cn/demo1.jpg)
 
-```vue
+```html
 <template>
   <div class="form-wrap">
     <vue-filter-box ref="filterBox" :model="items" :value="filterValue" button-hide @on-search="onSearch">
@@ -59,13 +64,9 @@ Vue.use(VueFilterBox)
     <p>{{filterValue}}</p>
   </div>
 </template>
+```
 
-<style lang="less" scoped>
-  .form-wrap {
-    padding: 20px;
-  }
-</style>
-
+```html
 <script>
   import {VueFilterBox} from '@/components/index.js'
   import {Button} from 'view-design'
@@ -173,21 +174,17 @@ Vue.use(VueFilterBox)
 </script>
 ```
 
-### 展示为:
-
-![demo1](http://img.ruofee.cn/demo1.jpg)
-
 ## API文档
 
 ### Props
 
-| 属性        | 说明                                        | 类型    | 默认值  |
-| ----------- | ------------------------------------------- | ------- | ------- |
-| model       | 筛选项构建模型, 详细结构查看[Model](#model) | Object  | {}      |
-| value       | 绑定的值, 可使用v-model双向绑定             | Object  | {}      |
-| size        | 组件大小, 可选值为small, default, large     | String  | default |
-| loading     | 加载状态                                    | Boolean | false   |
-| button-hide | 是否隐藏默认按钮                            | Boolean | false   |
+| 属性        | 说明                                                         | 类型    | 默认值  |
+| ----------- | ------------------------------------------------------------ | ------- | ------- |
+| model       | 筛选项构建模型, 详细结构查看[Model](#model)                  | Object  | {}      |
+| value       | 绑定的值, 可使用v-model双向绑定, value的**key**为**model**中的`<key>` | Object  | {}      |
+| size        | 组件大小, 可选值为small, default, large                      | String  | default |
+| loading     | 加载状态                                                     | Boolean | false   |
+| button-hide | 是否隐藏默认按钮                                             | Boolean | false   |
 
 ### Events
 
@@ -203,7 +200,9 @@ Vue.use(VueFilterBox)
 
 ### Model
 
-**props中的model结构**
+**props中的model结构设计**, **model**的格式为`{<key>: <modelItem>}`, **key**表示该筛选组件对应**value**中的键值
+
+以下是**modelItem**的设计:
 
 | 属性      | 说明                                                         | 类型             | 示例                        |
 | --------- | ------------------------------------------------------------ | ---------------- | --------------------------- |
@@ -217,7 +216,7 @@ Vue.use(VueFilterBox)
 
 ### Options
 
-**model props中的options结构**
+**model props中的options结构设计**
 
 | 属性  | 说明             | 类型          |
 | ----- | ---------------- | ------------- |
@@ -226,7 +225,7 @@ Vue.use(VueFilterBox)
 
 ### Components
 
-**vue-filter-box支持的组件**
+**vue-filter-box支持的组件列表**
 
 | 组件名称    | 说明                    |
 | ----------- | ----------------------- |
@@ -241,9 +240,9 @@ Vue.use(VueFilterBox)
 
 ### 自定义组件
 
-除了[Components中的组件, 还可进行使用自定义组件, 只要组件内部支持v-model进行数据绑定即可, 以下是自定义组件的例子:
+除了[Components](#components)中指定的组件, 还可使用**自定义组件**, 只要组件内部支持v-model进行数据绑定即可, 以下是**自定义组件**的例子:
 
-```vue
+```html
 // CustomComponent.vue
 <template>
   <div class="wrap">
@@ -259,7 +258,9 @@ Vue.use(VueFilterBox)
     </div>
   </div>
 </template>
+```
 
+```html
 <style lang="less">
   @color: #dddee2;
   @backgroundColor: #2d8bf0;
@@ -326,7 +327,7 @@ Vue.use(VueFilterBox)
 
 在vue-filter-box中引入:
 
-```vue
+```html
 // App.vue
 <template>
     <div class="form-wrap">
@@ -334,7 +335,9 @@ Vue.use(VueFilterBox)
       </vue-filter-box>
     </div>
 </template>
+```
 
+```html
 <script>
   import {VueFilterBox} from '@/components/index.js'
   import CustomComponent from './CustomComponent.vue'
@@ -366,6 +369,6 @@ Vue.use(VueFilterBox)
 </script>
 ```
 
-展示:
+**展示**:
 
 ![demo2](http://img.ruofee.cn/demo2.jpg)

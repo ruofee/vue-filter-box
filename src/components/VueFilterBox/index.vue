@@ -12,6 +12,7 @@
       <Component
         v-model="_value[key]"
         :is="modelData.component"
+        :size="size"
         v-bind="modelData.prop || {}"
         v-on="modelData.on || {}">
         <template v-if="haveOptionsComponents.includes(modelData.component)">
@@ -25,7 +26,7 @@
       </Component>
     </FormItem>
     <FormItem v-if="!buttonHide">
-      <Button type="primary" @click="onSearch">筛选</Button>
+      <Button type="primary" :size="size" @click="onSearch">筛选</Button>
     </FormItem>
     <Spin fix v-if="loading">
       <Icon type="ios-loading" :size="23" class="loading"></Icon>
@@ -87,6 +88,12 @@
         type: Object,
         default() {
           return {}
+        }
+      },
+      size: {
+        type: [String, Object],
+        validator(size) {
+          return ['small', 'default', 'large'].includes(size)
         }
       },
       loading: {

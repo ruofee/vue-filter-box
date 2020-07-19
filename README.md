@@ -208,9 +208,10 @@ Vue.use(VueFilterBox)
 | component | 筛选项组件, 支持Input, Select等, 具体查看[Components](#components) | String/Component | 'Input'                     |
 | title     | 筛选项标题                                                   | String           | '这是一个标题'              |
 | width     | 筛选项宽度, 支持px和百分比                                   | String           | '200px' 或者 '20%'          |
+| required  | 是否必填                                                     | Boolean          | false                       |
 | options   | 下拉选项, 仅当component为Select时有效, 具体格式请查看[Options](#options) | Array            | [{label: '文本', value: 1}] |
 | props     | 筛选项组件props, 具体请查看[view-design](<https://www.iviewui.com/>)中组件对应的props | Object           | {type: 'textarea'}          |
-| on        | 筛选项组件的methods, 具体请查看[view-design](https://www.iviewui.com/)中组件支持的methods |                  | {'on-change': () => {}}     |
+| on        | 筛选项组件的methods, 具体请查看[view-design](https://www.iviewui.com/)中组件支持的methods | Object           | {'on-change': () => {}}     |
 
 ### Options
 

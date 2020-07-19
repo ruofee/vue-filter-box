@@ -29,6 +29,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "main": "./lib/vue-filter-box.umd.min.js",
+  "typings": "types/index.d.ts",
   "peerDependencies": {
     "vue": "^2.6.11",
     "view-design": "^4.1.3"

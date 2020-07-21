@@ -81,6 +81,7 @@
 
 <script>
   export default {
+    name: 'VueFilterBox',
     props: {
       value: {
         type: Object,

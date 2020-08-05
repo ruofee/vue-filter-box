@@ -1,0 +1,7 @@
+{
+  "vue-filter-box": {
+    "attributes": ["value", "model", "size", "loading", "size", "buttonHide"],
+    "defaults": ["v-model", "model"],
+    "description": "Generate filter-box automatically by using model"
+  }
+}

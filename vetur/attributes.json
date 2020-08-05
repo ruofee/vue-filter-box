@@ -1,0 +1,20 @@
+{
+    "value": {
+      "description": "Value of filter-box."
+    },
+    "size": {
+      "options": ["small", "default", "large"],
+      "description": "Size of component, default: small."
+    },
+    "model": {
+      "description": "Which will be used to generate the filter-box."
+    },
+    "loading": {
+      "type": "boolean",
+      "description": "Loading status of filter-box."
+    },
+    "buttonHide": {
+      "type": "boolean",
+      "description": "Whether hide the footer-button of the filter-box, default: false."
+    }
+  }

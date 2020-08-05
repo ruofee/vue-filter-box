@@ -54,6 +54,7 @@
       /deep/ .ivu-form-item-content {
         flex-grow: 1;
         padding-right: 10px;
+        overflow: hidden;
 
         /deep/ .ivu-form-item-error-tip {
           display: none;

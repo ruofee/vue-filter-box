@@ -174,7 +174,7 @@ Vue.use(VueFilterBox)
 </script>
 ```
 
-## API文档
+## 使用文档
 
 ### Props
 

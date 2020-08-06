@@ -1,5 +1,5 @@
 <template>
-  <Form class="filter" ref="filter" :model="_value" label-colon>
+  <Form class="filter" ref="filter" :model="_value" label-colon @submit.native.prevent>
     <FormItem
       v-for="(modelData, key) of model"
       :style="{

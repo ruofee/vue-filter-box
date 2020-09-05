@@ -12,7 +12,7 @@
       <Component
         v-model="_value[key]"
         :is="modelData.component"
-        :size="size"
+        :size="(modelData.prop && modelData.prop.size) || size"
         v-bind="modelData.prop || {}"
         v-on="modelData.on || {}">
         <template v-if="haveOptionsComponents.includes(modelData.component)">

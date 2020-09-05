@@ -31,7 +31,7 @@
     <Spin fix v-if="loading">
       <Icon type="ios-loading" :size="23" class="loading"></Icon>
     </Spin>
-    <slot name="footer"></slot>
+    <slot name="footer" :on-search="onSearch"></slot>
   </Form>
 </template>
 

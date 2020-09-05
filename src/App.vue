@@ -1,15 +1,31 @@
 <template>
   <div class="form-wrap">
-    <vue-filter-box ref="filterBox" :model="items" :value="filterValue" button-hide @on-search="onSearch">
-      <div slot="footer"><Button type="primary" @click="searchWrap">搜索</Button></div>
-    </vue-filter-box>
-    <p>{{filterValue}}</p>
+    <div class="filter-wrap">
+      <h3 class="title">筛选框:</h3>
+      <vue-filter-box ref="filterBox" :model="items" :value="filterValue" size="small" button-hide @on-search="onSearch">
+        <template v-slot:footer="slotProp">
+          <Button type="primary" @click="slotProp.onSearch">搜索</Button>
+        </template>
+      </vue-filter-box>
+    </div>
+    <div class="show-box">
+      <h3>筛选框绑定值:</h3>
+      <pre>{{_filterValue}}</pre>
+    </div>
   </div>
 </template>
 
 <style lang="less" scoped>
   .form-wrap {
     padding: 20px;
+
+    .title {
+      margin-bottom: 10px;
+    }
+
+    .show-box {
+      margin-top: 20px;
+    }
   }
 </style>
 
@@ -108,12 +124,21 @@
           }
       }
     },
+    computed: {
+      _filterValue() {
+        try {
+          return JSON.stringify(this.filterValue, null, 2)
+        }
+        catch(err) {
+          return ''
+        }
+      }
+    },
     methods: {
-      searchWrap() {
-        this.$refs.filterBox.onSearch()
-      },
       onSearch(value) {
-        console.log(value)
+        this.$Modal.success({
+          render: h => h('pre', this._filterValue)
+        })
       }
     }
   }

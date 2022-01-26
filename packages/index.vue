@@ -135,9 +135,9 @@ export default {
     },
     init() {
       if (this.model) {
-        this.model.forEach(({ type, key, defaultValue }) => {
+        this.model.forEach(({ type, key }) => {
           if (typeof this.value[key] === 'undefined') {
-            const value = defaultValue ?? getDefaultValueByComponentType(type);
+            const value = getDefaultValueByComponentType(type);
             this.$set(this.value, key, value);
           }
         });

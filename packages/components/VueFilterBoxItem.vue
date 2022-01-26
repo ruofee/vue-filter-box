@@ -16,10 +16,10 @@
     <component
       v-else
       v-model="value[modelItem.key]"
-      :is="modelItem.type"
+      :is="component"
       v-bind="modelItem.props"
       v-on="modelItem.events">
-      <template v-if="isSelect(modelItem.type)">
+      <template v-if="isSelect">
         <i-option
           v-for="option of (modelItem.options || [])"
           :key="option.value"
@@ -27,7 +27,7 @@
           {{ option.label }}
         </i-option>
       </template>
-      <template v-else-if="isCheckbox(modelItem.type)">
+      <template v-else-if="isCheckbox">
         <checkbox
           v-for="option of (modelItem.options || [])"
           :key="option.value"
@@ -41,7 +41,7 @@
 
 <script>
 import VueFilterBoxLabel from './VueFilterBoxLabel.vue';
-import { isSelect, isCheckbox } from '../utils/is';
+import { isSelect, isCheckbox, isStr } from '../utils/is';
 import { getSizePx } from '../utils/get';
 import { DEFAULT_PROPS } from '../constants';
 
@@ -81,14 +81,23 @@ export default {
     isFooter: {
       type: Boolean,
     },
-  },
-  data() {
-    return {
-      isSelect,
-      isCheckbox,
-    };
+    alias: {
+      type: Object,
+    },
   },
   computed: {
+    component() {
+      if (isStr(this.modelItem.type)) {
+        return this.alias[this.modelItem.type] ?? this.modelItem.type;
+      }
+      return this.modelItem.type;
+    },
+    isSelect() {
+      return isSelect(this.component);
+    },
+    isCheckbox() {
+      return isCheckbox(this.component);
+    },
     style() {
       const width = getSizePx(this.modelItem.width ?? this.width ?? undefined);
       const minWidth = getSizePx(this.modelItem.minWidth ?? this.minWidth ?? undefined);

@@ -17,7 +17,8 @@
       :label-width="labelWidth"
       :label-max-width="labelMaxWidth"
       :is-vertical="isVertical"
-      :hidden-colon="hiddenColon" />
+      :hidden-colon="hiddenColon"
+      :alias="alias" />
     <vue-filter-box-item
       class="vue-filter-box-item"
       :model-item="footerModelItem"
@@ -89,6 +90,10 @@ export default {
     },
     footerOneLine: {
       type: Boolean,
+    },
+    alias: {
+      type: Object,
+      default: getEmptyObject,
     },
   },
   data() {

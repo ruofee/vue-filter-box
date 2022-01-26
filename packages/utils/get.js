@@ -90,7 +90,6 @@ export function getDefaultValueByComponentType(component) {
     }
   } else {
     const props = component?.props;
-    console.log('props', props);
     if (isArr(props)) {
       return DEFAULT_COMPONENT_VALUE;
     }

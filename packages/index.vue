@@ -26,9 +26,11 @@
       hidden-colon>
       <slot name="footer" :loading="loading" :validate="validate" :reset="reset" :validate-field="validateField"></slot>
     </vue-filter-box-item>
-    <slot name="loading">
-      <spin v-if="loading" fix />
-    </slot>
+    <div v-show="loading" class="vue-filter-box-loading">
+      <slot name="loading">
+        <spin />
+      </slot>
+    </div>
   </i-form>
 </template>
 
@@ -147,6 +149,18 @@ export default {
     display: inline-flex;
     margin-right: 0;
     padding-right: 10px;
+  }
+  .vue-filter-box-loading {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, .9);
   }
 }
 .vue-filter-box_vertical {

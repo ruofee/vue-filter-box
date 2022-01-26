@@ -1,21 +1,21 @@
 <template>
-  <component :is="getComponentIs(render)" />
+  <component :is="componentIs" />
 </template>
 
 <script>
 export default {
-  name: 'LabelExtension',
+  name: 'LabelRender',
   props: {
     render: {
       type: Function,
     },
   },
-  methods: {
-    getComponentIs(render) {
+  computed: {
+    componentIs() {
       return {
-        render,
+        render: this.render,
       };
-    },
+    }
   },
 }
 </script>

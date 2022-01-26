@@ -4,21 +4,21 @@
     :style="style"
     :class="['vue-filter-box-item-label', !hiddenColon && 'vue-filter-box-item-label_colon', isVertical && 'vue-filter-box-item-label_vertical']">
     <div class="vue-filter-box-item-label-content">
-      <label-extension v-if="modelItem.labelPrefix" :render="modelItem.labelPrefix" />
-      <span :title="modelItem.label">{{ modelItem.label }}</span>
-      <label-extension v-if="modelItem.labelSuffix" :render="modelItem.labelSuffix" />
+      <label-render v-if="isFunc(modelItem.label)" :render="modelItem.label" />
+      <span v-else :title="modelItem.label">{{ modelItem.label }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import LabelExtension from './LabelExtension.vue';
+import LabelRender from './LabelRender.vue';
 import { getEmptyObject, getSizePx } from '../utils/get';
+import { isFunc } from '../utils/is';
 
 export default {
   name: 'VueFilterBoxLabel',
   components: {
-    LabelExtension,
+    LabelRender,
   },
   props: {
     modelItem: {
@@ -37,6 +37,11 @@ export default {
     labelMaxWidth: {
       type: Number,
     },
+  },
+  data() {
+    return {
+      isFunc,
+    };
   },
   computed: {
     style() {

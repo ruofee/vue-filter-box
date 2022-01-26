@@ -50,6 +50,23 @@ export function getParamCase(str) {
   }).toLowerCase();
 }
 
+
+function getPropDefaultValue(prop) {
+  if (isFunc(prop)) {
+    return prop();
+  }
+  if (isArr(prop)) {
+    return prop?.[0]?.();
+  }
+  if (typeof prop.default !== 'undefined') {
+    return isFunc(prop.default) ? prop.default() : prop.default;
+  }
+  if (prop?.type) {
+    return getPropDefaultValue(prop.type);
+  }
+  return DEFAULT_COMPONENT_VALUE;
+}
+
 export function getDefaultValueByComponentType(component) {
   if (isStr(component)) {
     const components = Vue?.options?.components;
@@ -73,15 +90,12 @@ export function getDefaultValueByComponentType(component) {
     }
   } else {
     const props = component?.props;
+    console.log('props', props);
     if (isArr(props)) {
       return DEFAULT_COMPONENT_VALUE;
-    } else {
-      const value = props?.value;
-      if (isFunc(value)) {
-        return valueProp();
-      }
-      return isFunc(value?.type) ? value.type() : '';
     }
+    const value = props?.value;
+    return getPropDefaultValue(value);
   }
   return DEFAULT_COMPONENT_VALUE;
 }

@@ -17,6 +17,7 @@
       v-else
       v-model="value[modelItem.key]"
       :is="component"
+      :disabled="componentDisabled"
       v-bind="modelItem.props"
       v-on="modelItem.events">
       <template v-if="isSelect">
@@ -30,6 +31,7 @@
       <template v-else-if="isCheckbox">
         <checkbox
           v-for="option of (modelItem.options || [])"
+          :disabled="componentDisabled"
           :key="option.value"
           :label="option.value">
           {{ option.label }}
@@ -56,6 +58,9 @@ export default {
     },
     modelItem: {
       type: Object,
+    },
+    disabled: {
+      type: Boolean,
     },
     width: {
       type: [Number, String],
@@ -113,6 +118,9 @@ export default {
         minWidth,
         maxWidth,
       };
+    },
+    componentDisabled() {
+      return this.modelItem.disabled ?? this.disabled;
     },
   },
 }

@@ -12,6 +12,7 @@
       :model-item="modelItem"
       :key="modelItem.key"
       :width="width"
+      :disabled="disabled"
       :min-width="minWidth"
       :max-width="maxWidth"
       :label-width="labelWidth"
@@ -60,6 +61,10 @@ export default {
       type: String,
       default: 'horizontal',
       validator: getValidator(['horizontal', 'vertical']),
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     rules: {
       type: Object,

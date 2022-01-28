@@ -13,6 +13,7 @@
       :key="modelItem.key"
       :width="width"
       :disabled="disabled"
+      :size="size"
       :min-width="minWidth"
       :max-width="maxWidth"
       :label-width="labelWidth"
@@ -71,6 +72,11 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+    size: {
+      type: String,
+      default: 'default',
+      validator: getValidator(['large', 'small', 'default']),
     },
     rules: {
       type: Object,

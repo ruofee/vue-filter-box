@@ -18,6 +18,7 @@
       v-model="value[modelItem.key]"
       :is="component"
       :disabled="componentDisabled"
+      :size="componentSize"
       v-bind="modelItem.props"
       v-on="modelItem.events">
       <template v-if="isSelect">
@@ -61,6 +62,9 @@ export default {
     },
     disabled: {
       type: Boolean,
+    },
+    size: {
+      type: String,
     },
     width: {
       type: [Number, String],
@@ -121,6 +125,9 @@ export default {
     },
     componentDisabled() {
       return this.modelItem.disabled ?? this.disabled;
+    },
+    componentSize() {
+      return this.modelItem.size ?? this.size;
     },
   },
 }

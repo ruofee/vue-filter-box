@@ -365,7 +365,17 @@ vue-filter-box 默认每个筛选项的标题最大宽度为 `120px`, 当标题�
 <vue-filter-box disabled></vue-filter-box>
 ```
 
-注意: 请确保筛选项组件支持 `disabled` prop
+注意: 请确保筛选项组件支持 `disabled` prop!
+
+### 筛选项组件大小
+
+通过设置 `size` 设置筛选项组件大小:
+
+```html
+<vue-filter-box size="small"></vue-filter-box>
+```
+
+注意: 请确保筛选项组件支持 `size` prop!
 
 ### 表单校验
 
@@ -462,6 +472,7 @@ footer 插槽可以让你设置筛选器的底部栏, 一般是按钮组; 你可
 | rules         | `object`                                                   |                |          | 筛选器校验规则, 具体可查看 [async-validator](https://github.com/yiminghe/async-validator) |
 | footerOneLine | `boolean`                                                  | `false`        |          | 底部栏是否独占一行                                           |
 | alias         | `object`                                                   | `{}`           |          | 筛选项组件别名                                               |
+| size          | `default`, `small`, `large`                                | `default`      |          | 筛选项组件大小                                               |
 
 ### Slots
 
@@ -490,20 +501,24 @@ footer 插槽可以让你设置筛选器的底部栏, 一般是按钮组; 你可
 
 筛选器结构描述对象, 多个 `modelItem` 构成  `model`:
 
-| 属性名        | 类型                                      | 默认值  | 是否必填 | 描述                                                         |
-| ------------- | ----------------------------------------- | ------- | -------- | ------------------------------------------------------------ |
-| type          | `string`, `component`                     |         | 是       | 筛选项组件, 如 'i-input'                                     |
-| label         | `string`, `(h: CreateElement) => VNode`   | `''`    |          | 筛选项标题; `CreateElement` 可查看: [vue createElement](https://cn.vuejs.org/v2/guide/render-function.html#createElement-%E5%8F%82%E6%95%B0) |
-| key           | `string`                                  |         | 是       | 筛选项对应的 key                                             |
-| width         | `string`, `number`                        |         |          | 筛选项宽度                                                   |
-| maxWidth      | `string`, `number`                        | `300`   |          | 筛选项最大宽度                                               |
-| minWidth      | `string`, `number`                        |         |          | 筛选项最小宽度                                               |
-| labelWidth    | `string`, `number`                        |         |          | 筛选项标题宽度                                               |
-| labelMaxWidth | `string`, `number`                        | `120`   |          | 筛选项标题最大宽度                                           |
-| hiddenColon   | `boolean`                                 | `false` |          | 是否隐藏筛选项标题后的冒号                                   |
-| disabled      | `boolean`                                 | `false` |          | 是否禁用                                                     |
-| rules         | `object`, `array`                         |         |          | 筛选器校验规则, 具体可查看[async-validator](https://github.com/yiminghe/async-validator) |
-| options       | `Array<{ label: string, value: string }>` | `[]`    |          | 选项列表, 当 `type` 为 `i-select` 或是 `checkbox-group` 时生效, `label` 为展示文本, `value` 为选项值 |
+| 属性名        | 类型                                      | 默认值    | 是否必填 | 描述                                                         |
+| ------------- | ----------------------------------------- | --------- | -------- | ------------------------------------------------------------ |
+| type          | `string`, `component`                     |           | 是       | 筛选项组件, 如 'i-input'                                     |
+| label         | `string`, `(h: CreateElement) => VNode`   | `''`      |          | 筛选项标题; `CreateElement` 可查看: [vue createElement](https://cn.vuejs.org/v2/guide/render-function.html#createElement-%E5%8F%82%E6%95%B0) |
+| key           | `string`                                  |           | 是       | 筛选项对应的 key                                             |
+| width         | `string`, `number`                        |           |          | 筛选项宽度                                                   |
+| maxWidth      | `string`, `number`                        | `300`     |          | 筛选项最大宽度                                               |
+| minWidth      | `string`, `number`                        |           |          | 筛选项最小宽度                                               |
+| labelWidth    | `string`, `number`                        |           |          | 筛选项标题宽度                                               |
+| labelMaxWidth | `string`, `number`                        | `120`     |          | 筛选项标题最大宽度                                           |
+| hiddenColon   | `boolean`                                 | `false`   |          | 是否隐藏筛选项标题后的冒号                                   |
+| disabled      | `boolean`                                 | `false`   |          | 是否禁用                                                     |
+| rules         | `object`, `array`                         |           |          | 筛选器校验规则, 具体可查看[async-validator](https://github.com/yiminghe/async-validator) |
+| options       | `Array<{ label: string, value: string }>` | `[]`      |          | 选项列表, 当 `type` 为 `i-select` 或是 `checkbox-group` 时生效, `label` 为展示文本, `value` 为选项值 |
+| size          | `default`, `small`, `large`               | `default` |          | 筛选项组件大小                                               |
 
-注意:  `modelItem` 属性优先级比 props 高, 当同时设置 `width` 时, 将会以 `modelItem` 的为准 😊
+注意:  `modelItem` 属性优先级比 props 高, 例如, 同时设置 `width` 时, 将会以 `modelItem` 的为准 😊
 
+## 问题反馈
+
+如果发现组件中存在的问题或是不足，可以提交你的问题到 [github issue](https://github.com/ruofee/vue-filter-box/issues), 或提交一个 Pull Request, 感谢你的参与!

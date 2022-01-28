@@ -26,10 +26,16 @@
       :is-vertical="isVertical"
       is-footer
       hidden-colon>
-      <slot name="footer" :loading="loading" :validate="validate" :reset="reset" :validate-field="validateField"></slot>
+      <slot name="footer"
+        :loading="loading"
+        :validate="validate"
+        :validate-field="validateField"
+        :reset="reset"
+        :reset-field="resetField">
+      </slot>
     </vue-filter-box-item>
     <div v-show="loading" class="vue-filter-box-loading">
-      <slot name="loading">
+      <slot name="loading" :loading="loading">
         <spin />
       </slot>
     </div>
@@ -137,6 +143,16 @@ export default {
     },
     reset() {
       return this.$refs.form.resetFields();
+    },
+    resetField(key) {
+      const fields = this.$refs.form?.fields;
+      if (fields) {
+        for (const field of fields) {
+          if (field?.$options?.propsData?.prop === key) {
+            field?.resetField && field.resetField();
+          }
+        }
+      }
     },
     init() {
       if (this.model) {

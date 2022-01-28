@@ -32,8 +32,8 @@
     "attributes": "vetur/attributes.json"
   },
   "peerDependencies": {
-    "vue": "^2.6.11",
-    "view-design": "^4.7.0"
+    "view-design": "^4.7.0",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",

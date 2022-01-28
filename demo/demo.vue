@@ -1,34 +1,43 @@
 <template>
   <div class="demo">
-    <div>
-      <checkbox v-model="isVertical" label="vertical">is vertical</checkbox>
+    <div class="box">
+      <h3 class="box-title">Props:</h3>
+        <checkbox v-model="mode" label="vertical">垂直布局</checkbox>
+        <checkbox v-model="loading" label="loading">加载状态</checkbox>
+        <checkbox v-model="disabled" label="disabled">禁用状态</checkbox>
+        <checkbox v-model="hiddenColon" label="hiddenColon">隐藏冒号</checkbox>
+        <checkbox v-model="footerOneLine" label="footerOneLine">底部栏独占一行</checkbox>
     </div>
     <vue-filter-box
       v-model="value"
-      loading
-      :hidden-colon="false"
-      :mode="isVertical ? 'vertical' : 'horizontal'"
       :rules="rules"
       :model="model"
-      footer-one-line>
+      :disabled="disabled"
+      :loading="loading"
+      :hidden-colon="hiddenColon"
+      :mode="mode ? 'vertical' : 'horizontal'"
+      :footer-one-line="footerOneLine"
+      :min-width="250"
+      width="20%">
       <template v-slot:footer="{ validate, reset, validateField }">
         <div>
-          <i-button @click="validate(onSubmit)">提交</i-button>
-          <i-button @click="reset">重置</i-button>
-          <i-button @click="validateField('roleType', onSubmit)">提交</i-button>
+          <i-button class="footer-button" type="primary" @click="validate(onSubmit)">提交</i-button>
+          <i-button class="footer-button" @click="reset">重置</i-button>
+          <i-button class="footer-button" @click="validateField('roleType', onSubmit)">提交</i-button>
         </div>
       </template>
     </vue-filter-box>
-    <div>
-      <p>Select Value:</p>
-      <pre>{{ value }}</pre>
+    <div class="box">
+      <h3 class="box-title">Select value:</h3>
+      <pre class="box-code">{{ value }}</pre>
     </div>
   </div>
 </template>
 
 <script>
-import { Select, CheckboxGroup } from 'view-design';
+import { CheckboxGroup } from 'view-design';
 import { VueFilterBox } from '../packages/index';
+import CustomizeSwitch from './CustomizeSwitch.vue';
 
 export default {
   name: 'Demo',
@@ -37,24 +46,23 @@ export default {
   },
   data() {
     return {
-      isVertical: true,
+      mode: false,
+      loading: false,
+      disabled: false,
+      hiddenColon: false,
+      footerOneLine: false,
+
       value: {},
       rules: {
-        roleType: [{ required: true, message: 'qqq' }],
+        roleType: [{ required: true, message: 'This field is required.' }],
       },
       model: [
         {
           type: 'i-input',
           label: 'Search',
           key: 'keyword',
-          rules: {
-            required: true,
-            message: 'This field is required',
-            trigger: 'blur',
-          },
-          defaultValue: '123',
           props: {
-            placeholder: 'ID / User Name',
+            placeholder: 'Please Input Keyword',
           },
         },
         {
@@ -65,8 +73,26 @@ export default {
             required: true,
           },
           props: {
-            placeholder: 'Select Role type',
+            placeholder: 'Please Select Role type',
           },
+          options: [
+            {
+              label: '1',
+              value: '1',
+            },
+            {
+              label: '2',
+              value: '2',
+            },
+            {
+              label: '3',
+              value: '3',
+            },
+            {
+              label: '4',
+              value: '4',
+            },
+          ],
         },
         {
           type: CheckboxGroup,
@@ -82,28 +108,19 @@ export default {
               value: '2',
             },
             {
-              label: '2',
+              label: '3',
               value: '3',
             },
             {
-              label: '2',
+              label: '4',
               value: '4',
             },
           ],
         },
         {
-          type: Select,
+          type: CustomizeSwitch,
           label: 'Gender',
           key: 'gender',
-          props: {
-            placeholder: 'Select Gender',
-          },
-          options: [
-            {
-              label: '1',
-              value: '1',
-            }
-          ],
         },
       ],
     };
@@ -119,5 +136,24 @@ export default {
 <style lang="less" scoped>
 .demo {
   padding: 10px;
+  .box {
+    margin-bottom: 20px;
+    .box-title {
+      margin-bottom: 8px;
+    }
+    .box-code {
+      padding: 10px;
+      width: 30%;
+      min-width: 400px;
+      background-color: #eee;
+      border-radius: 4px;
+    }
+  }
+  .footer-button {
+    margin-left: 8px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 </style>

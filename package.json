@@ -1,6 +1,6 @@
 {
   "name": "vue-filter-box",
-  "version": "2.0.7",
+  "version": "3.0.0",
   "description": "vue-filter-box is a dynamic filter box base on view-design",
   "homepage": "github.com/ruofee/vue-filter-box#readme",
   "license": "MIT",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --target lib --dest lib --name vue-filter-box ./src/components/index.js",
+    "build": "vue-cli-service build --target lib --dest lib --name vue-filter-box ./packages/index.js",
     "test:unit": "vue-cli-service test:unit"
   },
   "main": "./lib/vue-filter-box.umd.min.js",
@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "vue": "^2.6.11",
-    "view-design": "^4.1.3"
+    "view-design": "^4.7.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.3.0",
@@ -44,8 +44,9 @@
     "chai": "^4.1.2",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
-    "view-design": "^4.1.3",
+    "view-design": "^4.7.0",
     "vue": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "dependencies": {}
 }

@@ -351,9 +351,9 @@ vue-filter-box 默认每个筛选项的标题最大宽度为 `120px`, 当标题�
 
 ```html
 <vue-filter-box v-model="filterValue" :model="model" :loading="true">
-	<template v-slot:loading>
-		<p>loading...</p>
-	</template>
+  <template v-slot:loading>
+    <p>loading...</p>
+  </template>
 <vue-filter-box>
 ```
 

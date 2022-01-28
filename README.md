@@ -40,16 +40,16 @@ Vue.use(VueFilterBox);
 
 ```html
 <template>
-	<vue-filter-box></vue-filter-box>
+  <vue-filter-box></vue-filter-box>
 </template>
 
 <script>
 import { VueFilterBox } from '../packages/index';
 
 export default {
-	components: {
-		VueFilterBox,
-	},
+  components: {
+    VueFilterBox,
+  },
 };
 </script>
 ```
@@ -63,26 +63,26 @@ export default {
 ```html
 <template>
   <div>
-		<vue-filter-box :value="filterValue" :model="model"><vue-filter-box>
-		<pre>{{ filterValue }}</pre>
-	</div>
+    <vue-filter-box :value="filterValue" :model="model"><vue-filter-box>
+    <pre>{{ filterValue }}</pre>
+  </div>
 </template>
 
 <script>
 import { VueFilterBox } from 'vue-filter-box';
 
 export default {
-	components: {
-		VueFilterBox,
-	},
-	data() {
-		return {
-			model: [
-				{
-					type: 'i-input',
-					label: 'Keyword',
-					key: 'keyword',
-				},
+  components: {
+    VueFilterBox,
+  },
+  data() {
+    return {
+      model: [
+        {
+          type: 'i-input',
+          label: 'Keyword',
+          key: 'keyword',
+        },
         {
           type: 'i-select',
           label: 'Type',
@@ -92,10 +92,10 @@ export default {
             { label: 'Type2', value: 'type2' },
           ],
         },
-			],
-			filterValue: {},
-		};
-	},
+      ],
+      filterValue: {},
+    };
+  },
 }
 </script>
 ```
@@ -112,35 +112,35 @@ export default {
 
 ```html
 <template>
-	<vue-filter-box :value="filterValue" :model="model">
+  <vue-filter-box :value="filterValue" :model="model">
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				model: [
-					{
-						type: 'i-input',
-						label: 'Keyword',
-						key: 'keyword',
-					},
-					{
-						type: 'i-select',
-						label: 'Type',
-						key: 'type',
-						options: [
-							{ label: 'Type1', value: 'type1' },
-							{ label: 'Type2', value: 'type2' },
-						],
-					},
-				],
-				filterValue: {
-					keyword: '初始化设置的 keyword',
-				},
-			};
-		},
-	}
+export default {
+  data() {
+    return {
+      model: [
+        {
+          type: 'i-input',
+          label: 'Keyword',
+          key: 'keyword',
+        },
+        {
+          type: 'i-select',
+          label: 'Type',
+          key: 'type',
+          options: [
+            { label: 'Type1', value: 'type1' },
+            { label: 'Type2', value: 'type2' },
+          ],
+        },
+      ],
+      filterValue: {
+        keyword: '初始化设置的 keyword',
+      },
+    };
+  },
+}
 </script>
 ```
 
@@ -149,20 +149,20 @@ export default {
 ```js
 // 以下是筛选项 component props:
 {
-	props: {
-		// 默认值`为 ''
-		value: String,
-		// 默认取第一个类型, 因此默认值为 0
-		value: [Number, String],
-		// 默认值为 ''
-		value: {
-			type: String,
-		},
-		// 默认取第一个类型, 因此默认值为 0
-		value: {
-			type: [Number, String],
-		}
-	}
+  props: {
+    // 默认值`为 ''
+    value: String,
+    // 默认取第一个类型, 因此默认值为 0
+    value: [Number, String],
+    // 默认值为 ''
+    value: {
+      type: String,
+    },
+    // 默认取第一个类型, 因此默认值为 0
+    value: {
+      type: [Number, String],
+    }
+  }
 }
 // 当 props 为数组时, 因为无法判断 value 的类型, 因此默认设置 '', 这种情况最好是主动设置 vue-filter-box 的默认值:
 props: ['value']
